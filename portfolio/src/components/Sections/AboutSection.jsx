@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import {useInView, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 import { JOURNEY_STEPS, PASSIONS } from '../../utils/data';
 import SIGNATURE from "../../assets/waleed.png";

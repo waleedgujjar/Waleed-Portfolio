@@ -1,5 +1,4 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { CheckCircle, X, Sparkles } from 'lucide-react';
 
 const SuccessModel = ({ showSuccess, setShowSuccess, isDarkMode }) => {

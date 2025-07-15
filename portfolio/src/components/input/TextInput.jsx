@@ -1,4 +1,3 @@
-import React from 'react';
 
 const TextInput = ({ isDarkMode, value, handleInputChange, textarea, label }) => {
   const InputComponent = textarea ? "textarea" : "input";

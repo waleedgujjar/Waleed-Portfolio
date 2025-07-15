@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Globe } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { useInView, useScroll, useTransform } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
 import { SKILLS_CATEGORY, STATS, TECH_STACK } from "../../utils/data.js";
 import { containerVariants, itemVariants } from "../../utils/helper.js";

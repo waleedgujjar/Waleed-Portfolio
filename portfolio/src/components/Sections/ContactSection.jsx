@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import {useInView, useScroll, useTransform } from 'framer-motion';
 import { Send } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { CONTACT_INFO, SOCIAL_LINKS } from '../../utils/data';
