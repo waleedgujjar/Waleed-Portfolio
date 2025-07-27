@@ -1,6 +1,6 @@
 import { Github, Linkedin, Mail, Globe } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
-
+import {motion} from "framer-motion";
 const socialLinks = [
   {
     name: 'GitHub',

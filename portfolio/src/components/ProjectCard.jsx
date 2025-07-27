@@ -1,5 +1,6 @@
 import { ExternalLink } from 'lucide-react';
 import { FiGithub } from 'react-icons/fi';
+import {motion} from "framer-motion";
 
 const ProjectCard = ({ project, index, isDarkMode }) => {
   const cardVariants = {

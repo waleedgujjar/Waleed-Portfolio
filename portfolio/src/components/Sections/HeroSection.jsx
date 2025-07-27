@@ -1,4 +1,4 @@
-import { useScroll, useTransform } from "framer-motion";
+import { useScroll, useTransform, motion } from "framer-motion";
 import { ArrowDown, Mail } from "lucide-react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { useTheme } from "../../context/ThemeContext";
@@ -14,15 +14,11 @@ const HeroSection = () => {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Animation Variants
   const container = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.4,
-      },
+      transition: { staggerChildren: 0.3, delayChildren: 0.4 },
     },
   };
 
@@ -36,11 +32,7 @@ const HeroSection = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 1,
-        delay: 0.6,
-        ease: "easeInOut",
-      },
+      transition: { duration: 1, delay: 0.6, ease: "easeInOut" },
     },
   };
 
@@ -55,28 +47,27 @@ const HeroSection = () => {
         style={{ y: heroY }}
         className="min-h-screen flex items-center justify-center relative px-6 pt-10"
       >
-        {/* 🔵 Background Glow Animation */}
+        {/* 🔵 Matching Background Effect */}
         <div className="absolute inset-0 overflow-hidden z-0">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-            className={`absolute top-10 right-10 w-[400px] h-[400px] rounded-full blur-3xl opacity-20 ${
+            className={`absolute top-20 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-10 ${
               isDarkMode ? "bg-blue-500" : "bg-blue-400"
             }`}
           />
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
-            className={`absolute bottom-10 left-10 w-[300px] h-[300px] rounded-full blur-3xl opacity-20 ${
+            className={`absolute bottom-10 right-1/4 w-80 h-80 rounded-full blur-3xl opacity-10 ${
               isDarkMode ? "bg-purple-500" : "bg-purple-400"
             }`}
           />
         </div>
 
         <div className="max-w-7xl mx-auto w-full z-10 mt-20">
-          {/* 🖥 Desktop View */}
+          {/* Desktop */}
           <div className="hidden lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
-            {/* 👈 Text Content */}
             <motion.div
               variants={container}
               initial="hidden"
@@ -85,9 +76,9 @@ const HeroSection = () => {
             >
               <motion.div
                 variants={fadeInUp}
-                className={`text-sm uppercase tracking-widest ${
+                className={`text-sm uppercase tracking-widest mb-6 ${
                   isDarkMode ? "text-gray-500" : "text-gray-600"
-                } mb-6`}
+                }`}
               >
                 Full Stack Developer
               </motion.div>
@@ -96,7 +87,7 @@ const HeroSection = () => {
                 variants={fadeInUp}
                 className="text-5xl xl:text-7xl font-light mb-8 leading-tight"
               >
-                <span className={`${isDarkMode ? "text-white" : "text-gray-900"}`}>
+                <span className={isDarkMode ? "text-white" : "text-gray-900"}>
                   Building digital
                 </span>
                 <br />
@@ -109,9 +100,9 @@ const HeroSection = () => {
 
               <motion.p
                 variants={fadeInUp}
-                className={`text-xl ${
+                className={`text-xl font-light max-w-lg leading-relaxed mb-12 ${
                   isDarkMode ? "text-gray-400" : "text-gray-600"
-                } mb-12 font-light leading-relaxed max-w-lg`}
+                }`}
               >
                 I craft beautiful, functional web applications with modern
                 technologies and thoughtful user experiences.
@@ -122,7 +113,7 @@ const HeroSection = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection("work")}
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-sm uppercase tracking-wider font-medium transition-all duration-300"
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-sm uppercase tracking-wider font-medium"
                 >
                   View Work
                 </motion.button>
@@ -130,56 +121,50 @@ const HeroSection = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection("contact")}
-                  className={`border ${
+                  className={`border px-8 py-4 rounded-full text-sm uppercase tracking-wider font-medium ${
                     isDarkMode
-                      ? "border-gray-700 hover:border-gray-600 text-gray-300"
-                      : "border-gray-300 hover:border-gray-400 text-gray-700"
-                  } px-8 py-4 rounded-full text-sm uppercase tracking-wider font-medium`}
+                      ? "border-gray-700 text-gray-300 hover:border-gray-600"
+                      : "border-gray-300 text-gray-700 hover:border-gray-400"
+                  }`}
                 >
                   Get In Touch
                 </motion.button>
               </motion.div>
 
-              {/* ✅ Social Icons with Separate Links */}
               <motion.div variants={fadeInUp} className="flex space-x-6 mb-12">
-                {/* GitHub */}
                 <motion.a
                   href="https://github.com/waleedgujjar"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.2 }}
-                  className={`p-3 rounded-full transition-colors ${
+                  className={`p-3 rounded-full border transition-colors ${
                     isDarkMode
-                      ? "border-gray-700 hover:border-gray-600 text-gray-300"
-                      : "border-gray-300 hover:border-gray-400 text-gray-700"
+                      ? "border-gray-700 text-gray-300 hover:border-gray-600"
+                      : "border-gray-300 text-gray-700 hover:border-gray-400"
                   }`}
                 >
                   <FiGithub size={20} />
                 </motion.a>
-
-                {/* LinkedIn */}
                 <motion.a
                   href="https://www.linkedin.com/in/waleedgujjar/"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.2 }}
-                  className={`p-3 rounded-full transition-colors ${
+                  className={`p-3 rounded-full border transition-colors ${
                     isDarkMode
-                      ? "border-gray-700 hover:border-gray-600 text-gray-300"
-                      : "border-gray-300 hover:border-gray-400 text-gray-700"
+                      ? "border-gray-700 text-gray-300 hover:border-gray-600"
+                      : "border-gray-300 text-gray-700 hover:border-gray-400"
                   }`}
                 >
                   <FiLinkedin size={20} />
                 </motion.a>
-
-                {/* Email */}
                 <motion.a
                   href="mailto:waleedgujjar@email.com"
                   whileHover={{ scale: 1.2 }}
-                  className={`p-3 rounded-full transition-colors ${
+                  className={`p-3 rounded-full border transition-colors ${
                     isDarkMode
-                      ? "border-gray-700 hover:border-gray-600 text-gray-300"
-                      : "border-gray-300 hover:border-gray-400 text-gray-700"
+                      ? "border-gray-700 text-gray-300 hover:border-gray-600"
+                      : "border-gray-300 text-gray-700 hover:border-gray-400"
                   }`}
                 >
                   <Mail size={20} />
@@ -187,7 +172,7 @@ const HeroSection = () => {
               </motion.div>
             </motion.div>
 
-            {/* 👉 Image + Tech Text */}
+            {/* 👉 Image Section */}
             <motion.div
               initial="hidden"
               animate="visible"
@@ -220,9 +205,9 @@ const HeroSection = () => {
 
               <motion.div
                 whileHover={{ scale: 1.03 }}
-                className={`w-80 h-96 rounded-3xl overflow-hidden border-4 ${
+                className={`w-80 h-96 rounded-3xl overflow-hidden border-4 shadow-2xl ${
                   isDarkMode ? "border-gray-800" : "border-gray-300"
-                } shadow-2xl`}
+                }`}
               >
                 <img
                   src={PROFILE_PIC}
@@ -240,7 +225,11 @@ const HeroSection = () => {
               alt="Profile"
               className="w-40 h-40 rounded-full border-4 shadow-xl object-cover mb-6"
             />
-            <p className="text-sm uppercase tracking-widest text-gray-500 mb-2">
+            <p
+              className={`text-sm uppercase tracking-widest mb-2 ${
+                isDarkMode ? "text-gray-500" : "text-gray-600"
+              }`}
+            >
               Full Stack Developer
             </p>
             <h1 className="text-3xl font-light leading-snug">
@@ -248,7 +237,11 @@ const HeroSection = () => {
               <span className="text-blue-500 font-medium">experiences</span> <br />
               that matter
             </h1>
-            <p className="text-base text-gray-500 mt-4 mb-6 px-4">
+            <p
+              className={`text-base mt-4 mb-6 px-4 ${
+                isDarkMode ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
               I craft beautiful, functional web applications with modern
               technologies and thoughtful user experiences.
             </p>
@@ -261,22 +254,33 @@ const HeroSection = () => {
               </button>
               <button
                 onClick={() => scrollToSection("contact")}
-                className="border border-gray-300 hover:border-gray-400 text-gray-700 px-6 py-2 rounded-full text-sm uppercase"
+                className={`border rounded-full px-6 py-2 text-sm uppercase ${
+                  isDarkMode
+                    ? "border-gray-700 text-gray-300 hover:border-gray-600"
+                    : "border-gray-300 text-gray-700 hover:border-gray-400"
+                }`}
               >
                 Get In Touch
               </button>
             </div>
-            <div className="flex space-x-4 text-sm text-gray-500 uppercase tracking-widest">
+            <div className="flex space-x-4 text-sm uppercase tracking-widest">
               {["React", ".", "TypeScript", ".", "NodeJs", ".", "MongoDB"].map(
                 (tech, i) => (
-                  <span key={i}>{tech}</span>
+                  <span
+                    key={i}
+                    className={
+                      isDarkMode ? "text-gray-500" : "text-gray-400"
+                    }
+                  >
+                    {tech}
+                  </span>
                 )
               )}
             </div>
           </div>
         </div>
 
-        {/* ⬇ Arrow Down */}
+        {/* ⬇ Animated Arrow */}
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}

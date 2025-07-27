@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
-import {useInView, useScroll, useTransform } from 'framer-motion';
+import { useInView, useScroll, useTransform, motion } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 import { JOURNEY_STEPS, PASSIONS } from '../../utils/data';
 import SIGNATURE from "../../assets/waleed.png";
+import SIGNATURE_DARK from "../../assets/waleedwhite.png";
 import { containerVariants, itemVariants } from '../../utils/helper';
 
 const AboutSection = () => {
@@ -17,7 +18,8 @@ const AboutSection = () => {
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   const timelineVariants = {
     hidden: { opacity: 0 },
@@ -46,15 +48,21 @@ const AboutSection = () => {
     <section
       id='about'
       ref={sectionRef}
-      className={`py-24 px-6 ${isDarkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"} relative overflow-hidden`}
+      className={`py-24 px-6 relative overflow-hidden ${isDarkMode ? "bg-gray-950 text-white" : "bg-gray-50 text-gray-900"}`}
     >
-      <motion.div style={{ y }}>
-        <div className="absolute top-40 right-1/3 w-80 h-80 rounded-full blur-3xl opacity-5" />
-        <div
-          className={`absolute bottom-20 left-1/3 w-96 h-96 rounded-full blur-3xl opacity-5 ${isDarkMode ? "bg-purple-500" : "bg-purple-400"}`}
+      {/* Matching Blurred Background Like Skill Section */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          style={{ y, opacity }}
+          className={`absolute top-32 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-5 ${isDarkMode ? "bg-purple-500" : "bg-purple-400"}`}
         />
-      </motion.div>
+        <motion.div
+          style={{ y, opacity }}
+          className={`absolute bottom-20 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-5 ${isDarkMode ? "bg-blue-500" : "bg-blue-400"}`}
+        />
+      </div>
 
+      {/* Content */}
       <div className='max-w-6xl mx-auto relative z-10'>
         <motion.div
           initial="hidden"
@@ -76,19 +84,21 @@ const AboutSection = () => {
         </motion.div>
 
         <motion.div className='grid lg:grid-cols-2 gap-16 items-start'>
+          {/* LEFT SIDE */}
           <motion.div
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={containerVariants}
             className='space-y-8'
           >
+            {/* Mission */}
             <motion.div
               variants={itemVariants}
               className={`p-8 rounded-2xl border ${
                 isDarkMode
-                  ? "bg-gray-800/50 border-gray-700 backdrop-blur-sm"
-                  : "bg-gray-50/80 border-gray-200 backdrop-blur-sm"
-              }`}
+                  ? "bg-gray-900/50 border-gray-800"
+                  : "bg-white/80 border-gray-200"
+              } backdrop-blur-sm`}
             >
               <h3 className='text-2xl font-medium mb-6'>My Mission</h3>
               <p className={`text-lg leading-relaxed mb-6 ${isDarkMode ? "text-gray-300" : "text-gray-700"}`}>
@@ -96,13 +106,14 @@ const AboutSection = () => {
                 My passion lies in crafting digital experiences that are not just functional, but delightful and
                 accessible to everyone.
               </p>
-              <p className={`text-base leading-relaxed ${isDarkMode ? "text-gray-400" : "text-gray-400"}`}>
+              <p className={`text-base leading-relaxed ${isDarkMode ? "text-gray-400" : "text-gray-500"}`}>
                 When I'm not coding, you'll find me exploring new frameworks,
                 contributing to open source, or mentoring aspiring developers. I love the constant evolution of
                 web technologies and the endless possibilities they bring to create meaningful digital experiences.
               </p>
             </motion.div>
 
+            {/* Passions */}
             <motion.div variants={itemVariants}>
               <h3 className='text-xl font-medium mb-6'>What I Love Building</h3>
               <div className='grid gap-4'>
@@ -113,11 +124,11 @@ const AboutSection = () => {
                     whileHover={{ x: 4 }}
                     className={`flex items-center space-x-4 rounded-xl ${
                       isDarkMode
-                        ? "bg-gray-800/30 hover:bg-gray-800/50"
-                        : "bg-gray-50/50 hover:bg-gray-100/50"
+                        ? "bg-gray-900/30 hover:bg-gray-900/50"
+                        : "bg-white/70 hover:bg-white"
                     } transition-all duration-300`}
                   >
-                    <div className={`p-3 rounded-lg ${isDarkMode ? "bg-gray-700" : "bg-white"}`}>
+                    <div className={`p-3 rounded-lg flex items-center justify-center w-12 h-12 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}>
                       {React.createElement(passion.icon, {
                         size: 20,
                         className: "text-blue-500",
@@ -134,12 +145,17 @@ const AboutSection = () => {
               </div>
             </motion.div>
 
+            {/* Signature */}
             <motion.div variants={itemVariants} className='text-center py-8'>
               <div className={`text-sm ${isDarkMode ? "text-gray-500" : "text-gray-600"} mb-4`}>
                 Crafted With Passion by
               </div>
               <div className='flex justify-center'>
-                <img src={SIGNATURE} alt='Waleed' className='w-32 h-auto' />
+                <img
+                  src={isDarkMode ? SIGNATURE_DARK : SIGNATURE}
+                  alt='Waleed Signature'
+                  className='w-32 h-auto'
+                />
               </div>
               <div className='text-lg font-medium text-blue-500 mt-2'>
                 Waleed Nisar
@@ -147,7 +163,8 @@ const AboutSection = () => {
             </motion.div>
           </motion.div>
 
-          <motion.div 
+          {/* RIGHT SIDE - Journey */}
+          <motion.div
             ref={timelineRef}
             initial="hidden"
             animate={timelineInView ? "visible" : "hidden"}
@@ -169,8 +186,8 @@ const AboutSection = () => {
                   </div>
                   <div className={`flex-grow p-6 rounded-xl border transition-all duration-300 ${
                     isDarkMode
-                      ? "bg-gray-800/50 border-gray-700 hover:border-gray-600 hover:bg-gray-800/70"
-                      : "bg-white/80 border-gray-200 hover:border-gray-300 hover:bg-white"
+                      ? "bg-gray-900/50 border-gray-800 hover:bg-gray-900/70"
+                      : "bg-white/80 border-gray-200 hover:bg-white"
                   } backdrop-blur-sm`}>
                     <h4 className='text-xl font-medium'>{step.title}</h4>
                     <span className={`text-sm px-3 py-1 rounded-full ${isDarkMode ? "bg-gray-700 text-gray-300" : "bg-gray-100 text-gray-700"}`}>
@@ -188,24 +205,30 @@ const AboutSection = () => {
             </div>
           </motion.div>
         </motion.div>
+
+        {/* CTA */}
         <motion.div
-        initial="hidden"
-        animate={isInView ? "visible": "hidden"}
-        variants={containerVariants}
-        className='text-center mt-20'>
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={containerVariants}
+          className='text-center mt-20'
+        >
           <motion.div
-          variants={itemVariants}
-          className='flex flex-col items-center space-y-6'>
-            <p className={`text-lg ${
-              isDarkMode ? "bg-gray-400" : "text-gray-600"}`}>Ready to bring your ideas to life?</p>
-              <motion.button 
-              whileHover={{y:-2, scale:1.05}}
-              whileTap={{scale:0.98}}
-              className='bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full text-sm uppercase tracking-wider font-medium transition-all duration-300'>
-                Let's Work Together
-              </motion.button>
-              </motion.div>
-              </motion.div>
+            variants={itemVariants}
+            className='flex flex-col items-center space-y-6'
+          >
+            <p className={`text-lg ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
+              Ready to bring your ideas to life?
+            </p>
+            <motion.button
+              whileHover={{ y: -2, scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              className='bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full text-sm uppercase tracking-wider font-medium transition-all duration-300'
+            >
+              Let's Work Together
+            </motion.button>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,45 +1,36 @@
-import  { useRef } from 'react';
-import {  useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { useInView, motion } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 import { PROJECTS } from '../../utils/data';
-import ProjectCard from "../ProjectCard";
+import ProjectCard from '../ProjectCard';
 import { containerVariants, itemVariants } from '../../utils/helper';
 
 const ProjectSection = () => {
   const { isDarkMode } = useTheme();
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
 
   return (
     <section
-      id='work'
+      id="work"
       ref={sectionRef}
       className={`py-24 px-6 ${
-        isDarkMode ? "bg-gray-950 text-white" : "bg-gray-50 text-gray-900"
+        isDarkMode ? 'bg-gray-950 text-white' : 'bg-gray-50 text-gray-900'
       } relative overflow-hidden`}
     >
-      {/* Background Blur Effect */}
-      <div className='absolute inset-0 overflow-hidden'>
-        <div
-          className={`absolute top-20 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-5 ${
-            isDarkMode ? "bg-purple-500" : "bg-purple-400"
-          }`}
-        />
-      </div>
-
       {/* Content Wrapper */}
-      <div className='max-w-7xl mx-auto relative z-10'>
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
         <motion.div
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={isInView ? 'visible' : 'hidden'}
           variants={containerVariants}
           className="text-center mb-12"
         >
           <motion.div
             variants={itemVariants}
             className={`text-sm uppercase tracking-widest font-semibold mb-4 inline-block px-3 py-1 rounded-full ${
-              isDarkMode ? "bg-gray-800 text-gray-300" : "bg-gray-200 text-gray-700"
+              isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-200 text-gray-700'
             }`}
           >
             Featured Work
@@ -55,7 +46,7 @@ const ProjectSection = () => {
           <motion.p
             variants={itemVariants}
             className={`text-lg font-light max-w-2xl mx-auto ${
-              isDarkMode ? "text-gray-400" : "text-gray-600"
+              isDarkMode ? 'text-gray-400' : 'text-gray-600'
             }`}
           >
             A collection of projects that showcase my expertise in building modern web applications and solving complex problems.
@@ -65,7 +56,7 @@ const ProjectSection = () => {
         {/* Project Cards Grid */}
         <motion.div
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={isInView ? 'visible' : 'hidden'}
           variants={containerVariants}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
         >
