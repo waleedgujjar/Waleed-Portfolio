@@ -126,12 +126,11 @@ export const PROJECTS = [
     },
     {
         id: 3,
-        title: "LMS MERN Stack",
-        description: "A full-featured Learning Management System (LMS) built with the MERN stack. Supports user authentication, course creation, progress tracking, quizzes, and admin dashboards. Designed for scalability and seamless user experience.",
+        title: "E-COM Clothing Website",
+        description: "A full-featured E-Commerce Clothing Website built with the MERN stack. It supports user authentication, product management, shopping cart, secure checkout, and an admin dashboard for inventory and order tracking. Designed for scalability, fast performance, and a seamless shopping experience across all devices.",
         image: PROJECT_IMG_3,
         tags: ["MongoDB", "Express.js", "React", "Node.js", "JWT", "Redux"],
-        liveUrl: "https://lms-gs.vercel.app/",
-        Github: "#",
+        liveUrl: "https://sassiaesthetics.com/",
         featured: true,
         category: "Full Stack",
     },
@@ -249,7 +248,7 @@ export const CONTACT_INFO = [
     {
         icon: MapPin,
         label: "Location",
-        value: "Islamabad, Pakistan",
+        value: "Faisalabad, Pakistan",
     },
     {
         icon: Mail,
