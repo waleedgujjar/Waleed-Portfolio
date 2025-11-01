@@ -230,7 +230,7 @@ export const SOCIAL_LINKS = [
     },
     {
         icon: FiLinkedin,
-        url: "https://www.linkedin.com/in/muhammad-waleed-software-engineer/",
+        url: "https://www.linkedin.com/in/muhammad-waleed-nisar-software-engineer/",
         label: "LinkedIn",
          hoverBg: "hover:bg-[#0077B5]",
          hoverText: "hover:text-white",
